@@ -1,13 +1,13 @@
 <template>
   <div>
     <span v-show="showPrev" :id="prevHandler">
-      <slot name="prev" />
+      <slot name="prev"/>
     </span>
     <div :id="elementHandle" :class="['owl-carousel', 'owl-theme']">
-      <slot />
+      <slot/>
     </div>
     <span v-show="showNext" :id="nextHandler">
-      <slot name="next" />
+      <slot name="next"/>
     </span>
   </div>
 </template>
@@ -159,15 +159,16 @@ export default {
     },
     responsive: {
       type: Object,
-      default: () => {},
+      default: () => {
+      },
     },
     responsiveRefreshRate: {
       type: Number,
       default: 200,
     },
     responsiveBaseElement: {
-        type: String,
-        "default": "window"
+      type: String,
+      default: window,
     },
     video: {
       type: Boolean,
@@ -195,7 +196,8 @@ export default {
     },
     info: {
       type: Function,
-      default: () => {},
+      default: () => {
+      },
     },
     itemElement: {
       type: String,
@@ -220,10 +222,10 @@ export default {
     goTo: {
       type: Number,
       required: false,
-      default: 0
-    }
+      default: 0,
+    },
   },
-  data: function() {
+  data: function () {
     return {
       showPrev: false,
       showNext: true,
@@ -232,15 +234,15 @@ export default {
       elementHandle: 'carousel_' + this.generateUniqueId(),
       nextHandler: 'carousel_next_' + this.generateUniqueId(),
 
-      owl: null
+      owl: null,
     };
   },
   watch: {
     goTo(v) {
       this.owl.trigger('to.owl.carousel', [v, 500]);
-    }
+    },
   },
-  mounted: function() {
+  mounted: function () {
     this.owl = $('#' + this.elementHandle).owlCarousel({
       items: this.items,
       margin: this.margin,
@@ -293,11 +295,11 @@ export default {
       checkVisible: this.checkVisible,
     });
 
-    $('#' + this.prevHandler).click(function() {
+    $('#' + this.prevHandler).click(function () {
       this.owl.trigger('prev.owl.carousel');
     });
 
-    $('#' + this.nextHandler).click(function() {
+    $('#' + this.nextHandler).click(function () {
       this.owl.trigger('next.owl.carousel');
     });
 
